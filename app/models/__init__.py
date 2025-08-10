@@ -2,25 +2,16 @@
 Models module exports
 """
 from .schemas import (
-    ChatRequest, ChatResponse,
-    ReActRequest, ReActResponse,
     QuestionRequest, QuestionResponse,
-    RetrievalRequest, RetrievalResponse,
+    AgentRequest, AgentResponse,
+    RAGRequest, RAGResponse,
     HealthResponse
-)
-from .dspy_signatures import (
-    BasicChat, QuestionAnswering, ChainOfThoughtQA,
-    RetrievalEnhanced, ReActAgent
 )
 
 __all__ = [
     # Request/Response models
-    "ChatRequest", "ChatResponse",
-    "ReActRequest", "ReActResponse", 
     "QuestionRequest", "QuestionResponse",
-    "RetrievalRequest", "RetrievalResponse",
+    "AgentRequest", "AgentResponse", 
+    "RAGRequest", "RAGResponse",
     "HealthResponse",
-    # DSPy signatures
-    "BasicChat", "QuestionAnswering", "ChainOfThoughtQA",
-    "RetrievalEnhanced", "ReActAgent"
 ]

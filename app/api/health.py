@@ -6,7 +6,6 @@ from fastapi import APIRouter
 
 from app.core import config
 from app.models import HealthResponse
-from app.services import dspy_service
 
 router = APIRouter()
 
@@ -18,7 +17,7 @@ async def health_check():
         status="healthy",
         service=config.APP_NAME,
         version=config.VERSION,
-        dspy_configured=dspy_service.configured,
-        model_provider=dspy_service.model_provider,
+        dspy_configured=config.is_configured,
+        model_provider="DSPy ReAct Agent" if config.is_configured else "Not configured",
         timestamp=datetime.now()
     )

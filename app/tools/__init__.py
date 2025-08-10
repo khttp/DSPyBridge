@@ -1,6 +1,15 @@
 """
-Tools module exports
+Simple tools for DSPy agents
 """
-from .joke_api import get_joke_from_api, is_joke_request
+from .weather_tool import get_weather_tool
+from .joke_tool import get_joke_tool
 
-__all__ = ["get_joke_from_api", "is_joke_request"]
+def get_default_tools():
+    """Get the default set of tools"""
+    return [get_weather_tool, get_joke_tool]
+
+__all__ = [
+    "get_weather_tool",
+    "get_joke_tool", 
+    "get_default_tools"
+]

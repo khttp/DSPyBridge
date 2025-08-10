@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug FastAPI with Poetry",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--host", "0.0.0.0",
+                "--port", "8000",
+                "--reload"
+            ],
+            "env": {
+                "DEBUG": "true"
+            },
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "python": "C:/Users/V24AKhattab2/AppData/Local/pypoetry/Cache/virtualenvs/dspyproject-sjp4_DWc-py3.13/Scripts/python.exe"
+        },
+        {
+            "name": "Debug FastAPI with Poetry (Custom Host/Port)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--host", "${input:host}",
+                "--port", "${input:port}",
+                "--reload"
+            ],
+            "env": {
+                "DEBUG": "true"
+            },
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "python": "C:/Users/V24AKhattab2/AppData/Local/pypoetry/Cache/virtualenvs/dspyproject-sjp4_DWc-py3.13/Scripts/python.exe"
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "host",
+            "description": "Enter host address",
+            "default": "0.0.0.0",
+            "type": "promptString"
+        },
+        {
+            "id": "port",
+            "description": "Enter port number",
+            "default": "8000",
+            "type": "promptString"
+        }
+    ]
+}

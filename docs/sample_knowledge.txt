@@ -1,0 +1,36 @@
+DSPy Framework Knowledge Base
+
+What is DSPy?
+DSPy is a framework for algorithmically optimizing LM prompts and weights. It provides a unified interface for developing, debugging, and optimizing LM systems. DSPy introduces programming abstractions that allow you to express complex control flows and data structures while maintaining complete composability.
+
+Core Modules:
+1. Predict: The fundamental prediction module that generates outputs from inputs using language models.
+2. ChainOfThought: Extends Predict with step-by-step reasoning capabilities.
+3. ReAct: Reasoning + Acting module that can interact with external tools and APIs.
+4. Retrieve: Module for document retrieval and RAG (Retrieval Augmented Generation) systems.
+
+Key Features:
+- Modular design with composable components
+- Automatic optimization of prompts and parameters
+- Built-in evaluation and testing framework
+- Support for multiple language models and APIs
+- Pythonic interface for AI system development
+
+Use Cases:
+- Question answering systems
+- Document retrieval and summarization
+- Agent-based AI systems with tool usage
+- Multi-step reasoning tasks
+- RAG implementations
+- Chatbots and conversational AI
+
+Programming Model:
+DSPy uses signatures to define the input-output behavior of modules. A signature specifies what the module should accomplish, and DSPy handles the prompting details. This abstraction allows for easier optimization and better composability.
+
+Example Signature:
+class BasicQA(dspy.Signature):
+    question = dspy.InputField()
+    answer = dspy.OutputField()
+
+Optimization:
+DSPy includes optimizers that can automatically improve the performance of your programs by adjusting prompts, selecting better examples, or tuning model parameters based on your training data and metrics.

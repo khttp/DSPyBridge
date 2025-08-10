@@ -12,49 +12,59 @@ async def list_endpoints():
     return {
         "service": "DSPyBridge API",
         "endpoints": {
-            "/react": {
+            "/agent": {
                 "method": "POST",
-                "description": "ReAct agent with tool usage (recommended for chatbots)",
-                "use_case": "Smart chat that can use tools like joke API when appropriate"
-            },
-            "/chat": {
-                "method": "POST",
-                "description": "Basic chat endpoint for simple conversations",
-                "use_case": "Send user messages and get AI responses"
+                "description": "DSPy ReAct agent with weather and joke tools",
+                "use_case": "Send messages to an intelligent agent that can use tools"
             },
             "/question": {
-                "method": "POST", 
-                "description": "Direct question answering",
-                "use_case": "Get direct answers to questions with optional context"
+                "method": "POST",
+                "description": "Direct question answering with optional context",
+                "use_case": "Get answers to specific questions"
             },
             "/reasoning": {
-                "method": "POST",
-                "description": "Chain of thought reasoning",
-                "use_case": "Get detailed reasoning along with answers"
+                "method": "POST", 
+                "description": "Chain of thought reasoning for complex questions",
+                "use_case": "Get detailed step-by-step reasoning"
             },
-            "/retrieval": {
+            "/rag": {
                 "method": "POST",
-                "description": "Retrieval-enhanced generation",
-                "use_case": "Query documents and get contextual responses"
+                "description": "Retrieval-Augmented Generation from docs/ directory",
+                "use_case": "Ask questions about documents in the docs folder"
+            },
+            "/rag/documents": {
+                "method": "GET",
+                "description": "List all available documents",
+                "use_case": "See what documents are available for RAG queries"
+            },
+            "/rag/reload": {
+                "method": "POST",
+                "description": "Reload documents from docs directory",
+                "use_case": "Refresh document index after adding new files"
             },
             "/health": {
                 "method": "GET",
                 "description": "Health check and configuration status",
-                "use_case": "Check if DSPy and Groq are properly configured"
+                "use_case": "Check if service is running and properly configured"
+            },
+            "/endpoints": {
+                "method": "GET",
+                "description": "List all available endpoints",
+                "use_case": "Discover API capabilities"
             }
         },
         "features": {
-            "DSPy Integration": "Uses DSPy framework for structured AI programming",
+            "DSPy ReAct Agent": "Reasoning + Acting agent using DSPy framework",
             "Groq LLM": "Fast inference with Groq's language models",
-            "ReAct Agent": "Reasoning + Acting agent that can use tools",
-            "Tool Integration": "Joke API and extensible tool system",
-            "Retrieval Enhancement": "Document retrieval with contextual generation",
-            "Chain of Thought": "Step-by-step reasoning capabilities"
+            "Weather Tool": "Get current weather for any city",
+            "Joke Tool": "Get random jokes for entertainment",
+            "RAG System": "Retrieval-Augmented Generation from text files",
+            "Document Search": "Intelligent document retrieval and Q&A"
         },
         "quick_start": {
             "1": "Set GROQ_API_KEY environment variable",
             "2": "Install: poetry install",
-            "3": "Run: uvicorn app.main:app --reload",
-            "4": "Test: curl -X POST http://localhost:8000/react -d '{\"message\": \"Tell me a joke!\"}' -H 'Content-Type: application/json'"
+            "3": "Run: poetry run dev",
+            "4": "Test: curl -X POST http://localhost:8000/agent -d '{\"message\": \"Tell me a joke!\"}' -H 'Content-Type: application/json'"
         }
     }
