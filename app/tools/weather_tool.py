@@ -15,7 +15,6 @@ def get_weather_tool(city: str) -> str:
         str: Weather information or error message
     """
     try:
-        api_key = "ce1c42fc470201b40ca2794ef81a3ebd"
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         
         response = requests.get(url, timeout=15)
