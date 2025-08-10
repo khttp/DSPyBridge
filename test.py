@@ -1,12 +1,8 @@
 import dspy
 from dspy.adapters.types.tool import Tool
-import json
 import requests
-import os
-from dotenv import load_dotenv
 
 from app.core import config
-load_dotenv(override=True)
 
 
 groq_model = dspy.LM(
