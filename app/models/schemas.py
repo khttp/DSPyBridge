@@ -31,6 +31,7 @@ class QuestionResponse(BaseModel):
     """Response model for question answering."""
     question: str
     answer: str
+    context: Optional[str] = Field(default=None, description="Optional context")
     reasoning: Optional[str] = None
     timestamp: datetime
 

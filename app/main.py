@@ -7,7 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core import config, setup_logging
 from app.api import (
-    health_router, qa_router, retrieval_router, info_router, agent_router
+    health_router, qa_router, retrieval_router, info_router, 
+    agent_router, upload_router, finetuning_router
 )
 
 # Setup logging
@@ -53,6 +54,8 @@ app.include_router(qa_router, tags=["Q&A"])
 app.include_router(retrieval_router, tags=["RAG"])
 app.include_router(info_router, tags=["Info"])
 app.include_router(agent_router, tags=["Agent"])
+app.include_router(upload_router, tags=["Upload"])
+app.include_router(finetuning_router, prefix="/api", tags=["Fine-tuning"])
 
 
 def run():

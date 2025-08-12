@@ -2,7 +2,7 @@
 Time and date tools for DSPy agents
 """
 from datetime import datetime, timezone
-from typing import str
+from typing import Dict, Any
 
 try:
     import pytz
@@ -11,16 +11,19 @@ except ImportError:
     PYTZ_AVAILABLE = False
 
 
-def get_current_time_tool(timezone_name: str = "UTC") -> str:
+def get_current_time_tool(params: Dict[str, Any] = None) -> str:
     """
     Get current time for a specific timezone.
     
     Args:
-        timezone_name (str): Timezone name (e.g., 'UTC', 'US/Eastern', 'Europe/London')
+        params (Dict[str, Any]): Parameters containing:
+            timezone_name (str): Timezone name (e.g., 'UTC', 'US/Eastern', 'Europe/London')
         
     Returns:
         str: Current time in the specified timezone or error message
     """
+    # Extract timezone from params or use default
+    timezone_name = params.get("timezone_name", "UTC") if params else "UTC"
     try:
         if timezone_name.upper() == "UTC":
             tz = timezone.utc

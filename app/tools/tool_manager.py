@@ -3,7 +3,7 @@ Tool management utilities for DSPy agents
 """
 from typing import List, Callable, Dict, Any
 from .weather_tool import get_weather_tool
-from .joke_tool import get_joke_tool, get_dad_joke_tool
+from .joke_tool import get_joke_tool
 from .time_tool import get_current_time_tool, get_current_date_tool
 
 
@@ -18,7 +18,6 @@ class ToolRegistry:
         """Register default tools"""
         self.register("weather", get_weather_tool)
         self.register("joke", get_joke_tool)
-        self.register("dad_joke", get_dad_joke_tool)
         self.register("time", get_current_time_tool)
         self.register("date", get_current_date_tool)
     
@@ -68,10 +67,10 @@ def get_extended_tools() -> List[Callable]:
 def get_tools_by_category(category: str) -> List[Callable]:
     """Get tools by category"""
     categories = {
-        "entertainment": [get_joke_tool, get_dad_joke_tool],
+        "entertainment": [get_joke_tool],
         "weather": [get_weather_tool],
         "utility": [get_weather_tool, get_current_time_tool, get_current_date_tool],
-        "fun": [get_joke_tool, get_dad_joke_tool],
+        "fun": [get_joke_tool],
         "time": [get_current_time_tool, get_current_date_tool]
     }
     return categories.get(category, [])

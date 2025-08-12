@@ -35,3 +35,23 @@ def get_joke_tool() -> str:
         
     except Exception:
         return "Sorry, I couldn't fetch a joke right now."
+def get_joke_tool(params: dict = None) -> str:
+    """
+    Get a random joke from JokeAPI.
+    Args:
+        params (dict): Not used, for compatibility
+    Returns:
+        str: A random joke or error message
+    """
+    import requests
+    try:
+        response = requests.get("https://v2.jokeapi.dev/joke/Any?safe-mode", timeout=10)
+        data = response.json()
+        if data.get("type") == "single":
+            return data.get("joke")
+        elif data.get("type") == "twopart":
+            return f"{data.get('setup')} ... {data.get('delivery')}"
+        else:
+            return "Sorry, I couldn't fetch a joke."
+    except Exception:
+        return "Sorry, I couldn't fetch a joke."

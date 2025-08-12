@@ -21,12 +21,13 @@ class QuestionModule(dspy.Module):
         class QuestionSignature(dspy.Signature):
             """Simple question answering"""
             question = dspy.InputField(desc="User question")
+            context = dspy.InputField(desc="Optional context to help answer")
             answer = dspy.OutputField(desc="Direct answer")
         
         self.predict = dspy.Predict(QuestionSignature)
     
-    def forward(self, question: str) -> dspy.Prediction:
-        return self.predict(question=question)
+    def forward(self, question: str,context: str=None) -> dspy.Prediction:
+        return self.predict(question=question, context=context)
 
 
 class ReasoningModule(dspy.Module):
@@ -34,17 +35,16 @@ class ReasoningModule(dspy.Module):
     
     def __init__(self):
         super().__init__()
-        
         class ReasoningSignature(dspy.Signature):
-            """Question answering with step-by-step reasoning"""
+            """Question answering with step-by-step reasoning and context"""
             question = dspy.InputField(desc="Question requiring reasoning")
+            context = dspy.InputField(desc="Optional context to help reasoning")
             reasoning = dspy.OutputField(desc="Step-by-step reasoning process")
             answer = dspy.OutputField(desc="Final answer")
-        
         self.cot = dspy.ChainOfThought(ReasoningSignature)
-    
-    def forward(self, question: str) -> dspy.Prediction:
-        return self.cot(question=question)
+
+    def forward(self, question: str, context: str = None) -> dspy.Prediction:
+        return self.cot(question=question, context=context)
 
 
 # Global module instances
@@ -105,10 +105,11 @@ async def question_answering(request: QuestionRequest):
     
     try:
         # Use QuestionModule for direct questions
-        result = _question_module(question=request.question)
+        result = _question_module(question=request.question,context=request.context)
         
         return QuestionResponse(
             question=request.question,
+            context=request.context,
             answer=result.answer,
             timestamp=datetime.now()
         )
@@ -138,10 +139,11 @@ async def chain_of_thought_reasoning(request: QuestionRequest):
     
     try:
         # Use ReasoningModule for detailed reasoning
-        result = _reasoning_module(question=request.question)
+        result = _reasoning_module(question=request.question,context=request.context)
         
         return QuestionResponse(
             question=request.question,
+            context = request.context,
             answer=result.answer,
             reasoning=result.reasoning,
             timestamp=datetime.now()
