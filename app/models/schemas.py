@@ -48,8 +48,8 @@ class RAGResponse(BaseModel):
     """Response model for RAG queries."""
     query: str
     response: str
-    retrieved_docs: List[str]
-    context_used: str
+    retrieved_docs: Optional[List[str]] = Field(default=[], description="List of retrieved documents")
+    context_used: Optional[str] = Field(default=None, description="Context used for generating the response")
     timestamp: datetime
 
 

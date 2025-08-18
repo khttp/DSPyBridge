@@ -106,6 +106,7 @@ async def question_answering(request: QuestionRequest):
     try:
         # Use QuestionModule for direct questions
         result = _question_module(question=request.question,context=request.context)
+        print(dspy.inspect_history(n=1))
         
         return QuestionResponse(
             question=request.question,
