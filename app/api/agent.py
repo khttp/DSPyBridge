@@ -48,13 +48,13 @@ def _ensure_configured():
     
     try:
         # Configure DSPy
-        lm = dspy.LM(
-            model=config.DEFAULT_MODEL,
-            api_key=config.GROQ_API_KEY,
-            max_tokens=config.DEFAULT_MAX_TOKENS,
-            temperature=config.DEFAULT_TEMPERATURE
-        )
-        dspy.configure(lm=lm)
+        # lm = dspy.LM(
+        #     model=config.DEFAULT_MODEL,
+        #     api_key=config.GROQ_API_KEY,
+        #     max_tokens=config.DEFAULT_MAX_TOKENS,
+        #     temperature=config.DEFAULT_TEMPERATURE
+        # )
+        # dspy.configure(lm=lm)
         
         # Initialize agent module with tools
         tools = get_default_tools()

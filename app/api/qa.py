@@ -12,6 +12,7 @@ logger = setup_logging()
 router = APIRouter()
 
 
+
 class QuestionModule(dspy.Module):
     """DSPy Module for simple question answering"""
     
@@ -22,7 +23,7 @@ class QuestionModule(dspy.Module):
             """Simple question answering"""
             question = dspy.InputField(desc="User question")
             context = dspy.InputField(desc="Optional context to help answer")
-            answer = dspy.OutputField(desc="Direct answer")
+            answer = dspy.OutputField(desc="response as intents and entities")
         
         self.predict = dspy.Predict(QuestionSignature)
     
@@ -37,10 +38,10 @@ class ReasoningModule(dspy.Module):
         super().__init__()
         class ReasoningSignature(dspy.Signature):
             """Question answering with step-by-step reasoning and context"""
-            question = dspy.InputField(desc="Question requiring reasoning")
+            question = dspy.InputField(desc="user input")
             context = dspy.InputField(desc="Optional context to help reasoning")
             reasoning = dspy.OutputField(desc="Step-by-step reasoning process")
-            answer = dspy.OutputField(desc="Final answer")
+            answer = dspy.OutputField(desc="intents and entities of the user input")
         self.cot = dspy.ChainOfThought(ReasoningSignature)
 
     def forward(self, question: str, context: str = None) -> dspy.Prediction:
@@ -66,13 +67,13 @@ def _ensure_configured():
     
     try:
         # Configure DSPy
-        lm = dspy.LM(
-            model=config.DEFAULT_MODEL,
-            api_key=config.GROQ_API_KEY,
-            max_tokens=config.DEFAULT_MAX_TOKENS,
-            temperature=config.DEFAULT_TEMPERATURE
-        )
-        dspy.configure(lm=lm)
+        # lm = dspy.LM(
+        #     model=config.DEFAULT_MODEL,
+        #     api_key=config.GROQ_API_KEY,
+        #     max_tokens=config.DEFAULT_MAX_TOKENS,
+        #     temperature=config.DEFAULT_TEMPERATURE
+        # )
+        # dspy.configure(lm=lm)
         
         # Initialize modules
         _question_module = QuestionModule()

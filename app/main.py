@@ -1,19 +1,36 @@
 """
 DSPyBridge - Main FastAPI application
 """
+import dspy
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core import config, setup_logging
 from app.api import (
-    health_router, qa_router, retrieval_router, info_router, 
+    health_router, qa_router, info_router, 
     agent_router, upload_router, finetuning_router
+    ,retrieval_router
 )
 
+import os
 # Setup logging
 logger = setup_logging()
+lm = dspy.LM(
+    api_key=config.GROQ_API_KEY,
+    model=config.DEFAULT_MODEL,
+    temperature=config.DEFAULT_TEMPERATURE,
+    max_tokens=config.DEFAULT_MAX_TOKENS
+)
+# configure dspy with azure openai deployment
+# openailm = dspy.LM(
+#     model=config.AZURE_OPENAI_DEPLOYMENT,
+#     azure_openai_api_key=config.AZURE_OPENAI_API_KEY,
+#     azure_openai_base_url=config.AZURE_OPENAI_BASE_URL,
+#     azure_openai_version=config.AZURE_OPENAI_VERSION
+# )
 
+dspy.configure(lm=lm)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

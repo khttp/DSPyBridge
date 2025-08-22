@@ -25,7 +25,11 @@ class Config:
     DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "groq/llama-3.1-8b-instant")
     DEFAULT_MAX_TOKENS: int = int(os.getenv("DEFAULT_MAX_TOKENS", "500"))
     DEFAULT_TEMPERATURE: float = float(os.getenv("DEFAULT_TEMPERATURE", "0.7"))
-    
+    AZURE_OPENAI_API_KEY: Optional[str] = os.getenv("AZURE_OPENAI_API_KEY")
+    AZURE_OPENAI_DEPLOYMENT: Optional[str] = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+    AZURE_OPENAI_BASE_URL: Optional[str] = os.getenv("AZURE_OPENAI_BASE_URL")
+    AZURE_OPENAI_VERSION: Optional[str] = os.getenv("AZURE_OPENAI_VERSION")
+
     # CORS
     ALLOWED_ORIGINS: list = ["*"]  # Configure for production
     

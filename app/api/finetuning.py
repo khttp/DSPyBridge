@@ -10,13 +10,13 @@ from app.models.finetuning_schemas import TrainingResponse, PredictionRequest, P
 logger = setup_logging()
 router = APIRouter()
 
-lm = dspy.LM(
-    api_key=config.GROQ_API_KEY,
-    model=config.DEFAULT_MODEL,
-    temperature=config.DEFAULT_TEMPERATURE,
-    max_tokens=config.DEFAULT_MAX_TOKENS
-)
-dspy.configure(lm=lm)
+# lm = dspy.LM(
+#     api_key=config.GROQ_API_KEY,
+#     model=config.DEFAULT_MODEL,
+#     temperature=config.DEFAULT_TEMPERATURE,
+#     max_tokens=config.DEFAULT_MAX_TOKENS
+# )
+# dspy.configure(lm=lm)
 
 TRAIN_DATA_DIR = Path("train-data")
 
